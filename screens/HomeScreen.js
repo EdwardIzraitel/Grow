@@ -7,7 +7,7 @@ import { WebBrowser } from "expo";
 
 import { MonoText } from "../components/StyledText";
 import { TouchableOpacity } from "react-native-gesture-handler";
-
+import PeopleCard from "../components/PeopleCard";
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null
@@ -17,12 +17,10 @@ export default class HomeScreen extends React.Component {
     return (
       <Container>
         <TitleBar>
-          <TextContainer>
-            <TitleText>
-              Hi,
-              <ColoredText> Andy</ColoredText>
-            </TitleText>
-          </TextContainer>
+          <TitleText>
+            Hi,
+            <ColoredText> Andy</ColoredText>
+          </TitleText>
           <Cover>
             <ProfileImg source={require("../assets/images/Andy.png")} />
           </Cover>
@@ -48,44 +46,31 @@ export default class HomeScreen extends React.Component {
             showsHorizontalScrollIndicator={false}
             style={{ left: 40, marginTop: 30 }}
           >
-            <PeopleCard>
+            {people.map((person, index) => (
               <TouchableOpacity
-                onPress={() => this.props.navigation.push("Cards")}
+                key={index}
+                onPress={() =>
+                  this.props.navigation.push("Cards", {
+                    Cards: person
+                  })
+                }
+                style={{ marginRight: 20 }}
               >
-                <Image source={require("../assets/images/Jordan.png")} />
+                <PeopleCard
+                  name={person.name}
+                  age={person.age}
+                  image={person.image}
+                  ambition={person.ambition}
+                />
               </TouchableOpacity>
-              <ImageText>Jordan, 32.</ImageText>
-              <InfoText>Ambition: To Teach</InfoText>
-            </PeopleCard>
+            ))}
           </ScrollView>
         </People>
       </Container>
     );
   }
 }
-const InfoText = styled.Text`
-  font-size: 20px;
-  position: absolute;
-  left: 20px;
-  bottom: 20px;
-  color: white;
-`;
-const ImageText = styled.Text`
-  position: absolute;
-  font-size: 35px;
-  left: 20px;
-  top: 211px;
-  color: white;
-`;
-const Image = styled.Image`
-  border-radius: 10px;
-  height: 100%;
-  width: 100%;
-`;
-const PeopleCard = styled.View`
-  width: 295px;
-  height: 300px;
-`;
+
 const SuggestedBar = styled.View`
   margin-top: 30px;
   flex-direction: row;
@@ -108,13 +93,10 @@ const TitleBar = styled.View`
   margin-top: 50px;
 `;
 
-const TextContainer = styled.View`
-  left: 40;
-`;
-
 const TitleText = styled.Text`
   font-size: 35px;
   color: black;
+  left: 40;
 `;
 
 const ColoredText = styled.Text`
@@ -158,49 +140,49 @@ const ViewLine = styled.View`
 `;
 const people = [
   {
-    img: "",
+    img: require("../assets/images/Jordan.png"),
     name: "Hank",
     age: "55",
     ambition: "Online marketing"
   },
   {
-    img: "",
+    img: require("../assets/images/Jordan.png"),
     name: "Steve",
     age: "38",
     ambition: "Develop cool apps"
   },
   {
-    img: "",
+    img: require("../assets/images/Jordan.png"),
     name: "Harvey",
     age: "43",
     ambition: "Do social work"
   },
   {
-    img: "",
+    img: require("../assets/images/Jordan.png"),
     name: "Pat",
     age: "42",
     ambition: "Inspire children"
   },
   {
-    img: "",
+    img: require("../assets/images/Jordan.png"),
     name: "Joan",
     age: "47",
     ambition: "Work with data"
   },
   {
-    img: "",
+    img: require("../assets/images/Jordan.png"),
     name: "Fazan",
     age: "44",
     ambition: "Be a pharmacist"
   },
   {
-    img: "",
+    img: require("../assets/images/Jordan.png"),
     name: "Joaquin",
     age: "37",
     ambition: "Design websites"
   },
   {
-    img: "",
+    img: require("../assets/images/Jordan.png"),
     name: "Kevin",
     age: "29",
     ambition: "Graphic design"

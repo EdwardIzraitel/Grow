@@ -17,11 +17,14 @@ export default class CardsScreen extends React.Component {
     StatusBar.setHidden(true);
   }
   render() {
+    const { navigation } = this.props;
+    const person = navigation.getParam("Cards");
     return (
       <Container>
         <Cover>
           <ViewImage>
-            <Image source={require("../assets/images/Jordan.png")} />
+            {/* <Image source={require("../assets/images/Jordan.png")} /> */}
+            <Image source={person.image} />
           </ViewImage>
           <TouchableOpacity
             style={{ position: "absolute", right: 20, top: 40 }}
@@ -39,7 +42,7 @@ export default class CardsScreen extends React.Component {
           </TouchableOpacity>
         </Cover>
         <TitleCard>
-          <TitleText>Animals</TitleText>
+          <TitleText>{person.name}</TitleText>
           <TinyText>15k giving this month</TinyText>
         </TitleCard>
         <ScrollView
@@ -58,7 +61,7 @@ export default class CardsScreen extends React.Component {
         </ScrollView>
         <TouchableOpacity style={{ marginBottom: 30 }}>
           <SelectBtn>
-            <BtnText>Give to "NAME HERE"</BtnText>
+            <BtnText>Give to {person.name}</BtnText>
           </SelectBtn>
         </TouchableOpacity>
       </Container>
