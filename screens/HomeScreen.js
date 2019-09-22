@@ -44,33 +44,39 @@ export default class HomeScreen extends React.Component {
           <ScrollView
             horizontal={true}
             showsHorizontalScrollIndicator={false}
-            style={{ left: 40, marginTop: 30 }}
+            style={{ marginTop: 30 }}
           >
-            {people.map((person, index) => (
-              <TouchableOpacity
-                key={index}
-                onPress={() =>
-                  this.props.navigation.push("Cards", {
-                    Cards: person
-                  })
-                }
-                style={{ marginRight: 20 }}
-              >
-                <PeopleCard
-                  name={person.name}
-                  age={person.age}
-                  image={person.image}
-                  ambition={person.ambition}
-                />
-              </TouchableOpacity>
-            ))}
+            <ImageContainer>
+              {people.map((person, index) => (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() =>
+                    this.props.navigation.push("Cards", {
+                      Cards: person
+                    })
+                  }
+                  style={{ marginRight: 20 }}
+                >
+                  <PeopleCard
+                    name={person.name}
+                    age={person.age}
+                    image={person.image}
+                    ambition={person.ambition}
+                  />
+                </TouchableOpacity>
+              ))}
+            </ImageContainer>
           </ScrollView>
         </People>
       </Container>
     );
   }
 }
-
+const ImageContainer = styled.View`
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: 40px;
+`;
 const SuggestedBar = styled.View`
   margin-top: 30px;
   flex-direction: row;

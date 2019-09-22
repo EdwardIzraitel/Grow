@@ -24,7 +24,7 @@ export default class CardsScreen extends React.Component {
         <Cover>
           <ViewImage>
             {/* <Image source={require("../assets/images/Jordan.png")} /> */}
-            <Image source={person.image} />
+            <Image source={require("../assets/images/Jordan.png")} />
           </ViewImage>
           <TouchableOpacity
             style={{ position: "absolute", right: 20, top: 40 }}

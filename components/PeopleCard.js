@@ -5,7 +5,10 @@ export default class PeopleCard extends React.Component {
   render() {
     return (
       <PeopleCards>
-        <Image source={this.props.image} resizeMode="contain" />
+        <Image
+          source={require("../assets/images/Jordan.png")}
+          resizeMode="contain"
+        />
         <ImageText>
           {this.props.name},{this.props.age}
         </ImageText>
