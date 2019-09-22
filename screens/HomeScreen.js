@@ -14,7 +14,7 @@ export default class HomeScreen extends React.Component {
     header: null
   };
   componentDidMount() {
-    // this.props.navigation.push("LogIn");
+    //this.props.navigation.push("LogIn");
   }
   render() {
     return (

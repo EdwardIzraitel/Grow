@@ -1,16 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native";
+import { AbrilText } from "../components/StyledText";
 export default class PeopleCard extends React.Component {
   render() {
     return (
       <PeopleCards>
         <Image
           source={require("../assets/images/Jordan.png")}
-          resizeMode="contain"
+          // resizeMode="contain"
         />
+        {/* <AbrilText>Hi</AbrilText> */}
         <ImageText>
-          {this.props.name},{this.props.age}
+          {this.props.name}, {this.props.age}
         </ImageText>
         <InfoText>Ambition: {this.props.ambition}</InfoText>
       </PeopleCards>
@@ -23,7 +25,7 @@ const PeopleCards = styled.View`
   height: 300px;
 `;
 const Image = styled.Image`
-  border-radius: 10px;
+  border-radius: 15px;
   height: 100%;
   width: 100%;
 `;
