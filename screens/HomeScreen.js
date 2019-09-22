@@ -8,11 +8,14 @@ import { WebBrowser } from "expo";
 import { MonoText } from "../components/StyledText";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import PeopleCard from "../components/PeopleCard";
+import LogInScreen from "../screens/LogInScreen";
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null
   };
-
+  componentDidMount() {
+    // this.props.navigation.push("LogIn");
+  }
   render() {
     return (
       <Container>
@@ -149,48 +152,88 @@ const people = [
     img: require("../assets/images/Jordan.png"),
     name: "Hank",
     age: "55",
-    ambition: "Online marketing"
+    ambition: "Online marketing",
+    status: "Graduated",
+    donated: "$25",
+    invested: "$500",
+    fReq: "$1223",
+    fAqr: "$232"
   },
   {
     img: require("../assets/images/Jordan.png"),
     name: "Steve",
     age: "38",
-    ambition: "Develop cool apps"
+    ambition: "Develop cool apps",
+    status: "Graduated",
+    donated: "$25",
+    invested: "$500",
+    fReq: "$1223",
+    fAqr: "$232"
   },
   {
     img: require("../assets/images/Jordan.png"),
     name: "Harvey",
     age: "43",
-    ambition: "Do social work"
+    ambition: "Do social work",
+    status: "Graduated",
+    donated: "$25",
+    invested: "$500",
+    fReq: "$1223",
+    fAqr: "$232"
   },
   {
     img: require("../assets/images/Jordan.png"),
     name: "Pat",
     age: "42",
-    ambition: "Inspire children"
+    ambition: "Inspire children",
+    status: "Graduated",
+    donated: "$25",
+    invested: "$500",
+    fReq: "$1223",
+    fAqr: "$232"
   },
   {
     img: require("../assets/images/Jordan.png"),
     name: "Joan",
     age: "47",
-    ambition: "Work with data"
+    ambition: "Work with data",
+    status: "Graduated",
+    donated: "$25",
+    invested: "$500",
+    fReq: "$1223",
+    fAqr: "$232"
   },
   {
     img: require("../assets/images/Jordan.png"),
     name: "Fazan",
     age: "44",
-    ambition: "Be a pharmacist"
+    ambition: "Be a pharmacist",
+    status: "Graduated",
+    donated: "$25",
+    invested: "$500",
+    fReq: "$1223",
+    fAqr: "$232"
   },
   {
     img: require("../assets/images/Jordan.png"),
     name: "Joaquin",
     age: "37",
-    ambition: "Design websites"
+    ambition: "Design websites",
+    status: "Graduated",
+    donated: "$25",
+    invested: "$500",
+    fReq: "$1223",
+    fAqr: "$232"
   },
   {
     img: require("../assets/images/Jordan.png"),
     name: "Kevin",
     age: "29",
-    ambition: "Graphic design"
+    ambition: "Graphic design",
+    status: "Graduated",
+    donated: "$25",
+    invested: "$500",
+    fReq: "$1223",
+    fAqr: "$232"
   }
 ];

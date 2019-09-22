@@ -9,7 +9,6 @@ import {
   Slider,
   Text
 } from "react-native";
-import * as Font from "expo-font";
 export default class SettingsScreen extends React.Component {
   state = {
     value: false,
@@ -107,7 +106,6 @@ const TextName = styled.Text`
 `;
 const Name = styled.Text`
   font-weight: 100;
-  font-family: "Avenir";
 `;
 
 const AlertsContainer = styled.View`

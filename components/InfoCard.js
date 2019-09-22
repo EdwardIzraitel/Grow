@@ -24,7 +24,7 @@ class InfoCard extends React.Component {
             style={{ height: 90, width: 90, borderRadius: 15 }}
           />
           <TextContainer>
-            <Text style={{ marginBottom: 10 }}>Jordan</Text>
+            <Text style={{ marginBottom: 10 }}>{this.props.name}</Text>
             <Text style={{ fontSize: 15 }}>saldnasd</Text>
           </TextContainer>
           <Ionicons
@@ -39,21 +39,21 @@ class InfoCard extends React.Component {
           <InfoCol>
             <Col>
               <Text style={{ fontSize: 18 }}>Age</Text>
-              <Text style={{ fontSize: 35 }}>30</Text>
+              <Text style={{ fontSize: 35 }}>{this.props.age}</Text>
             </Col>
             <Col style={{ marginTop: 30 }}>
               <Text style={{ fontSize: 18 }}>Funds Required</Text>
-              <Text style={{ fontSize: 35 }}>$21321</Text>
+              <Text style={{ fontSize: 35 }}>{this.props.fReq}</Text>
             </Col>
           </InfoCol>
           <InfoCol style={{ marginRight: 20 }}>
             <Col>
               <Text style={{ fontSize: 18 }}>You Invested</Text>
-              <Text style={{ fontSize: 35 }}>$500</Text>
+              <Text style={{ fontSize: 35 }}>{this.props.invested}}</Text>
             </Col>
             <Col style={{ marginTop: 30 }}>
               <Text style={{ fontSize: 18 }}>Funds Aquired</Text>
-              <Text style={{ fontSize: 35 }}>$2</Text>
+              <Text style={{ fontSize: 35 }}>{this.props.fAqr}</Text>
             </Col>
           </InfoCol>
         </InfoRow>

@@ -2,39 +2,21 @@ import React from "react";
 import {
   ScrollView,
   StyleSheet,
-  Slider,
   TouchableOpacity,
   Animated
 } from "react-native";
-import { ExpoLinksView } from "@expo/samples";
 import styled from "styled-components";
 import { MonoText } from "../components/StyledText";
-import InfoCard from "../components/InfoCard";
-import Modal from "react-native-modal";
+import History from "../components/History";
+import Slider from "react-native-slider";
 export default class ProfileScreen extends React.Component {
   state = {
-    slideValue: 20,
-    isModalVisible: false
+    slideValue: 20
   };
 
-  toggleModal = () => {
-    this.setState({ isModalVisible: !this.state.isModalVisible });
-  };
   render() {
     return (
       <Container>
-        <Modal
-          isVisible={this.state.isModalVisible}
-          coverSceen={false}
-          backdropOpacity={0.3}
-          // onBackdropPress={this.state.isModalVisible}
-        >
-          <TouchableOpacity onPress={this.toggleModal}>
-            <InfoCard />
-
-            {/* <Text>Hiii</Text> */}
-          </TouchableOpacity>
-        </Modal>
         <TitleBar>
           <ProfileImg source={require("../assets/images/Andy.png")} />
           <TextContainer>
@@ -45,9 +27,11 @@ export default class ProfileScreen extends React.Component {
               step={20}
               maximumValue={500}
               minimumValue={20}
-              thumbTintColor="#38d39f"
+              // thumbTintColor="#38d39f"
               minimumTrackTintColor="#38d39f"
               onValueChange={slideValue => this.setState({ slideValue })}
+              trackStyle={{ height: 25, borderRadius: 15 }}
+              thumbStyle={{ height: 30, width: 30, borderRadius: 15 }}
             />
           </TextContainer>
         </TitleBar>
@@ -55,78 +39,56 @@ export default class ProfileScreen extends React.Component {
           <ScrollView
             horizontal={true}
             showsHorizontalScrollIndicator={false}
+            disableIntervalMomentum={false}
+            directionalLockEnabled={true}
             style={{
-              left: 20,
               top: 25
             }}
           >
-            <Card style={{ left: 15, alignItems: "center" }}>
-              <Image
-                source={require("../assets/images/pablo.png")}
-                style={{
-                  height: "100%",
-                  width: "100%",
-                  borderRadius: 15
-                }}
-              />
-              <Box />
-              <MonoText
-                style={{
-                  fontSize: 20
-                }}
-              >
-                **** **** **** 2338
-              </MonoText>
-            </Card>
-            <Card>
-              <Image source={require("../assets/images/styledCard.png")} />
-              <Texts style={{ position: "absolute", top: 51, left: 20 }}>
-                <LargeText>$600</LargeText>
-                <SmallText style={{ color: "#38d39f" }}>
-                  Total Invested
-                </SmallText>
-              </Texts>
-              <Texts style={{ top: 51, right: 20, position: "absolute" }}>
-                <LargeText style={{ textAlign: "center" }}>5</LargeText>
-                <SmallText style={{ color: "white" }}>People Helped</SmallText>
-              </Texts>
-            </Card>
+            <ImageContainer>
+              <Card style={{ left: 15, alignItems: "center" }}>
+                <Image
+                  source={require("../assets/images/pablo.png")}
+                  style={{
+                    height: "100%",
+                    width: "100%",
+                    borderRadius: 15
+                  }}
+                />
+                <Box />
+                <MonoText
+                  style={{
+                    fontSize: 20
+                  }}
+                >
+                  **** **** **** 2338
+                </MonoText>
+              </Card>
+              <Card>
+                <Image source={require("../assets/images/styledCard.png")} />
+                <Texts style={{ position: "absolute", top: 51, left: 20 }}>
+                  <LargeText>$600</LargeText>
+                  <SmallText style={{ color: "#38d39f" }}>
+                    Total Invested
+                  </SmallText>
+                </Texts>
+                <Texts style={{ top: 51, right: 20, position: "absolute" }}>
+                  <LargeText style={{ textAlign: "center" }}>5</LargeText>
+                  <SmallText style={{ color: "white" }}>
+                    People Helped
+                  </SmallText>
+                </Texts>
+              </Card>
+            </ImageContainer>
           </ScrollView>
         </Cards>
         <Funding>
           <Text>Funding History</Text>
-          <PersonHistory>
-            <TouchableOpacity onPress={this.toggleModal}>
-              <Image
-                source={require("../assets/images/Jordan.png")}
-                style={{ height: 90, width: 90, borderRadius: 15 }}
-              />
-            </TouchableOpacity>
-            <TextCol>
-              <Text style={{ fontSize: 15, paddingBottom: 10 }}>Jordan</Text>
-              <Text style={{ fontSize: 15, color: "#38d39f" }}>
-                <Text style={{ color: "black", fontSize: 15 }}>Status: </Text>
-                Graduated
-              </Text>
-            </TextCol>
-            <Text style={{ paddingLeft: 30, fontSize: 20 }}>$25</Text>
-          </PersonHistory>
-          <PersonHistory>
-            <Image
-              source={require("../assets/images/Jordan.png")}
-              style={{ height: 90, width: 90, borderRadius: 15 }}
-            />
-
-            <TextCol>
-              <Text style={{ fontSize: 15, paddingBottom: 10 }}>Jordan</Text>
-              <Text style={{ fontSize: 15, color: "#38d39f" }}>
-                <Text style={{ color: "black", fontSize: 15 }}>Status: </Text>
-                Graduated
-              </Text>
-            </TextCol>
-            <Text style={{ paddingLeft: 30, fontSize: 20 }}>$25</Text>
-          </PersonHistory>
         </Funding>
+
+        <ScrollView horizontal>
+          <History />
+        </ScrollView>
       </Container>
     );
   }
@@ -135,7 +97,14 @@ export default class ProfileScreen extends React.Component {
 ProfileScreen.navigationOptions = {
   header: null
 };
-const TextCont = styled.View``;
+const ImageContainer = styled.View`
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: 20px;
+`;
+const Col = styled.View`
+  flex-direction: column;
+`;
 const TextCol = styled.View`
   margin-left: 20px;
 `;
@@ -151,7 +120,6 @@ const Text = styled.Text`
   font-size: 25px;
 `;
 const Funding = styled.View`
-  margin-top: 30px;
   margin-left: 40px;
 `;
 const Texts = styled.View``;

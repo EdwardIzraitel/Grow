@@ -23,7 +23,6 @@ export default class CardsScreen extends React.Component {
       <Container>
         <Cover>
           <ViewImage>
-            {/* <Image source={require("../assets/images/Jordan.png")} /> */}
             <Image source={require("../assets/images/Jordan.png")} />
           </ViewImage>
           <TouchableOpacity
@@ -36,8 +35,6 @@ export default class CardsScreen extends React.Component {
               name="ios-close-circle-outline"
               size={45}
               color="#38d39f"
-
-              // style={{ alignItems: "center" }}
             />
           </TouchableOpacity>
         </Cover>

@@ -10,6 +10,7 @@ import HomeScreen from "../screens/HomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import { Ionicons } from "@expo/vector-icons";
+import LogInScreen from "../screens/LogInScreen";
 const config = Platform.select({
   web: { headerMode: "screen" },
   default: {}
@@ -18,7 +19,13 @@ const config = Platform.select({
 const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
-    Cards: CardsScreen
+    Cards: CardsScreen,
+    LogIn: {
+      screen: LogInScreen,
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    }
   },
   config
 );
@@ -26,7 +33,7 @@ const HomeStack = createStackNavigator(
 HomeStack.navigationOptions = ({ navigation }) => {
   var tabBarVisible = true;
   const routeName = navigation.state.routes[navigation.state.index].routeName;
-  if (routeName == "Cards") {
+  if (routeName == "Cards" || routeName == "LogIn") {
     tabBarVisible = false;
   }
   return {
