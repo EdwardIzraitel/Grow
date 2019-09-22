@@ -9,10 +9,19 @@ import styled from "styled-components";
 import { MonoText } from "../components/StyledText";
 import History from "../components/History";
 import Slider from "react-native-slider";
+import * as Font from "expo-font";
 export default class ProfileScreen extends React.Component {
   state = {
-    slideValue: 20
+    slideValue: 100,
+    fontLoaded: false
   };
+
+  async componentDidMount() {
+    await Font.loadAsync({
+      "Abril-Fatface": require("../assets/fonts/AbrilFatface-Regular.ttf")
+    });
+    this.setState({ fontLoaded: true });
+  }
 
   render() {
     return (
@@ -20,14 +29,20 @@ export default class ProfileScreen extends React.Component {
         <TitleBar>
           <ProfileImg source={require("../assets/images/Andy.png")} />
           <TextContainer>
-            <ColoredText>Andy</ColoredText>
+            {this.state.fontLoaded ? (
+              <ColoredText
+                style={{ fontFamily: "Abril-Fatface", color: "black" }}
+              >
+                Andy
+              </ColoredText>
+            ) : null}
             <Slider
               style={{ width: 154 }}
               value={this.state.slideValue}
               step={20}
               maximumValue={500}
               minimumValue={20}
-              // thumbTintColor="#38d39f"
+              thumbTintColor="white"
               minimumTrackTintColor="#38d39f"
               onValueChange={slideValue => this.setState({ slideValue })}
               trackStyle={{ height: 25, borderRadius: 15 }}
@@ -64,29 +79,45 @@ export default class ProfileScreen extends React.Component {
                   **** **** **** 2338
                 </MonoText>
               </Card>
-              <Card>
-                <Image source={require("../assets/images/styledCard.png")} />
-                <Texts style={{ position: "absolute", top: 51, left: 20 }}>
-                  <LargeText>$600</LargeText>
-                  <SmallText style={{ color: "#38d39f" }}>
-                    Total Invested
-                  </SmallText>
-                </Texts>
-                <Texts style={{ top: 51, right: 20, position: "absolute" }}>
-                  <LargeText style={{ textAlign: "center" }}>5</LargeText>
-                  <SmallText style={{ color: "white" }}>
-                    People Helped
-                  </SmallText>
-                </Texts>
-              </Card>
+              {this.state.fontLoaded ? (
+                <Card>
+                  <Image source={require("../assets/images/styledCard.png")} />
+                  <Texts style={{ position: "absolute", top: 51, left: 20 }}>
+                    <LargeText style={{ fontFamily: "Abril-Fatface" }}>
+                      $600
+                    </LargeText>
+
+                    <SmallText
+                      style={{ color: "#38d39f", fontFamily: "Avenir" }}
+                    >
+                      Total Invested
+                    </SmallText>
+                  </Texts>
+                  <Texts style={{ top: 51, right: 20, position: "absolute" }}>
+                    <LargeText
+                      style={{
+                        textAlign: "center",
+                        fontFamily: "Abril-Fatface"
+                      }}
+                    >
+                      5
+                    </LargeText>
+                    <SmallText style={{ color: "white", fontFamily: "Avenir" }}>
+                      People Helped
+                    </SmallText>
+                  </Texts>
+                </Card>
+              ) : null}
             </ImageContainer>
           </ScrollView>
         </Cards>
         <Funding>
-          <Text>Funding History</Text>
+          {this.state.fontLoaded ? (
+            <Text style={{ fontFamily: "Abril-Fatface" }}>Funding History</Text>
+          ) : null}
         </Funding>
 
-        <ScrollView horizontal>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <History />
         </ScrollView>
       </Container>
@@ -121,6 +152,8 @@ const Text = styled.Text`
 `;
 const Funding = styled.View`
   margin-left: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 `;
 const Texts = styled.View``;
 const LargeText = styled.Text`
@@ -157,6 +190,8 @@ const TitleBar = styled.View`
 `;
 const TextContainer = styled.View`
   margin-left: 60px;
+  justify-content: center;
+  /* align-items: center; */
 `;
 
 const ColoredText = styled.Text`

@@ -2,19 +2,31 @@ import React from "react";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native";
 import { AbrilText } from "../components/StyledText";
+import * as Font from "expo-font";
+
 export default class PeopleCard extends React.Component {
+  state = {
+    fontLoaded: false
+  };
+  async componentDidMount() {
+    await Font.loadAsync({
+      "Abril-Fatface": require("../assets/fonts/AbrilFatface-Regular.ttf")
+    });
+    this.setState({ fontLoaded: true });
+  }
   render() {
     return (
       <PeopleCards>
-        <Image
-          source={require("../assets/images/Jordan.png")}
-          // resizeMode="contain"
-        />
-        {/* <AbrilText>Hi</AbrilText> */}
-        <ImageText>
-          {this.props.name}, {this.props.age}
-        </ImageText>
-        <InfoText>Ambition: {this.props.ambition}</InfoText>
+        <Image source={this.props.image} />
+
+        {this.state.fontLoaded ? (
+          <ImageText style={{ fontFamily: "Abril-Fatface" }}>
+            {this.props.name}, {this.props.age}
+          </ImageText>
+        ) : null}
+        <InfoText style={{ fontFamily: "Avenir" }}>
+          Ambition: {this.props.ambition}
+        </InfoText>
       </PeopleCards>
     );
   }
@@ -43,3 +55,12 @@ const InfoText = styled.Text`
   bottom: 20px;
   color: white;
 `;
+const images = [
+  "../assets/images/Jordan.png",
+  "../assets/images/Pat.png",
+  "../assets/images/Joan.png",
+  "../assets/images/Harvey.png",
+  "../assets/images/Jordan.png",
+  "../assets/images/Jordan.png",
+  "../assets/images/Jordan.png"
+];

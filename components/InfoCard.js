@@ -2,13 +2,19 @@ import React from "react";
 import styled from "styled-components";
 import { TouchableOpacity, Animated } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import * as Font from "expo-font";
 class InfoCard extends React.Component {
-  state = { top: new Animated.Value(900) };
+  state = { top: new Animated.Value(900), fontLoaded: false };
 
   async componentDidMount() {
     Animated.spring(this.state.top, {
-      toValue: 220
+      toValue: 0
     }).start();
+
+    await Font.loadAsync({
+      "Abril-Fatface": require("../assets/fonts/AbrilFatface-Regular.ttf")
+    });
+    this.setState({ fontLoaded: true });
   }
   toggleInfo = () => {
     Animated.spring(this.state.top, {
@@ -20,12 +26,12 @@ class InfoCard extends React.Component {
       <AnimatedContainer style={{ top: this.state.top }}>
         <TopContainer>
           <Image
-            source={require("../assets/images/Jordan.png")}
+            source={require("../assets/images/Hank.png")}
             style={{ height: 90, width: 90, borderRadius: 15 }}
           />
           <TextContainer>
-            <Text style={{ marginBottom: 10 }}>{this.props.name}</Text>
-            <Text style={{ fontSize: 15 }}>saldnasd</Text>
+            <Text style={{ marginBottom: 10, fontSize: 18 }}>Hank</Text>
+            <Text style={{ fontSize: 15, color: "#38d39f" }}>Graduated</Text>
           </TextContainer>
           <Ionicons
             name="ios-close-circle-outline"
@@ -35,30 +41,46 @@ class InfoCard extends React.Component {
             // style={{ alignItems: "center" }}
           />
         </TopContainer>
-        <InfoRow>
-          <InfoCol>
-            <Col>
-              <Text style={{ fontSize: 18 }}>Age</Text>
-              <Text style={{ fontSize: 35 }}>{this.props.age}</Text>
-            </Col>
-            <Col style={{ marginTop: 30 }}>
-              <Text style={{ fontSize: 18 }}>Funds Required</Text>
-              <Text style={{ fontSize: 35 }}>{this.props.fReq}</Text>
-            </Col>
-          </InfoCol>
-          <InfoCol style={{ marginRight: 20 }}>
-            <Col>
-              <Text style={{ fontSize: 18 }}>You Invested</Text>
-              <Text style={{ fontSize: 35 }}>{this.props.invested}}</Text>
-            </Col>
-            <Col style={{ marginTop: 30 }}>
-              <Text style={{ fontSize: 18 }}>Funds Aquired</Text>
-              <Text style={{ fontSize: 35 }}>{this.props.fAqr}</Text>
-            </Col>
-          </InfoCol>
-        </InfoRow>
+        {this.state.fontLoaded ? (
+          <InfoRow>
+            <InfoCol>
+              <Col>
+                <Text style={{ fontSize: 18, fontFamily: "Avenir" }}>Age</Text>
+                <Text style={{ fontSize: 35, fontFamily: "Abril-Fatface" }}>
+                  63
+                </Text>
+              </Col>
+              <Col style={{ marginTop: 20 }}>
+                <Text style={{ fontSize: 18, fontFamily: "Avenir" }}>
+                  Funds Required
+                </Text>
+                <Text style={{ fontSize: 35, fontFamily: "Abril-Fatface" }}>
+                  $10,000
+                </Text>
+              </Col>
+            </InfoCol>
+            <InfoCol style={{ marginRight: 20 }}>
+              <Col>
+                <Text style={{ fontSize: 18, fontFamily: "Avenir" }}>
+                  You Invested
+                </Text>
+                <Text style={{ fontSize: 35, fontFamily: "Abril-Fatface" }}>
+                  $500
+                </Text>
+              </Col>
+              <Col style={{ marginTop: 20 }}>
+                <Text style={{ fontSize: 18, fontFamily: "Avenir" }}>
+                  Funds Aquired
+                </Text>
+                <Text style={{ fontSize: 35, fontFamily: "Abril-Fatface" }}>
+                  $10,000
+                </Text>
+              </Col>
+            </InfoCol>
+          </InfoRow>
+        ) : null}
         <TextCont>
-          <Text>Donated by 15 people</Text>
+          <Text style={{ color: "#38d39f" }}>Donated by 15 people</Text>
         </TextCont>
       </AnimatedContainer>
     );
@@ -98,7 +120,7 @@ const Container = styled.View`
   background: white;
   height: 370px;
   width: 375px;
-  right: 20;
+  /* right: 20; */
   border-radius: 13px;
 `;
 const Image = styled.Image``;

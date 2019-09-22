@@ -3,18 +3,26 @@ import { ScrollView, TouchableOpacity, StatusBar } from "react-native";
 
 import styled from "styled-components";
 import { Ionicons } from "@expo/vector-icons";
+import * as Font from "expo-font";
 
 import { WebBrowser } from "expo";
 
 import { MonoText } from "../components/StyledText";
 
 export default class CardsScreen extends React.Component {
+  state = {
+    fontLoaded: false
+  };
   static navigationOptions = {
     header: null,
     tabBarVisible: false
   };
-  componentDidMount() {
+  async componentDidMount() {
     StatusBar.setHidden(true);
+    await Font.loadAsync({
+      "Abril-Fatface": require("../assets/fonts/AbrilFatface-Regular.ttf")
+    });
+    this.setState({ fontLoaded: true });
   }
   render() {
     const { navigation } = this.props;
@@ -38,15 +46,21 @@ export default class CardsScreen extends React.Component {
             />
           </TouchableOpacity>
         </Cover>
-        <TitleCard>
-          <TitleText>{person.name}</TitleText>
-          <TinyText>15k giving this month</TinyText>
-        </TitleCard>
+        {this.state.fontLoaded ? (
+          <TitleCard>
+            <TitleText style={{ fontFamily: "Abril-Fatface" }}>
+              {person.name}
+            </TitleText>
+            <TinyText style={{ fontFamily: "Avenir" }}>
+              2k giving this month
+            </TinyText>
+          </TitleCard>
+        ) : null}
         <ScrollView
           showsVerticalScrollIndicator={false}
           style={{ marginTop: 50 }}
         >
-          <Desc>
+          <Desc style={{ fontFamily: "Avenir" }}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lorem
             elit, efficitur luctus nulla ac, dignissim placerat justo. Proin id
             tortor at eros laoreet feugiat. Donec suscipit pharetra nibh, at
@@ -58,7 +72,11 @@ export default class CardsScreen extends React.Component {
         </ScrollView>
         <TouchableOpacity style={{ marginBottom: 30 }}>
           <SelectBtn>
-            <BtnText>Give to {person.name}</BtnText>
+            {this.state.fontLoaded ? (
+              <BtnText style={{ fontFamily: "Abril-Fatface" }}>
+                Give to {person.name}
+              </BtnText>
+            ) : null}
           </SelectBtn>
         </TouchableOpacity>
       </Container>
@@ -102,24 +120,25 @@ const TitleCard = styled.View`
   left: 50;
   top: 350;
   z-index: 100;
+  align-items: center;
 `;
 
 const TitleText = styled.Text`
   font-size: 35px;
-  margin-left: 30px;
+  /* margin-left: 30px; */
   margin-top: 10px;
 `;
 
 const TinyText = styled.Text`
   font-size: 15px;
-  margin-left: 30px;
+  /* margin-left: 30px; */
 `;
 
 const Desc = styled.Text`
   font-size: 15px;
   width: 275px;
   height: 245px;
-  margin-left: 50px;
+  align-items: center;
   margin-top: 23px;
 `;
 

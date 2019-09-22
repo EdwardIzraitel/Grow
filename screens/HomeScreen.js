@@ -9,65 +9,96 @@ import { MonoText } from "../components/StyledText";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import PeopleCard from "../components/PeopleCard";
 import LogInScreen from "../screens/LogInScreen";
+import * as Font from "expo-font";
+
 export default class HomeScreen extends React.Component {
+  state = {
+    fontLoaded: false
+  };
   static navigationOptions = {
     header: null
   };
-  componentDidMount() {
+  async componentDidMount() {
     //this.props.navigation.push("LogIn");
+    await Font.loadAsync({
+      "Abril-Fatface": require("../assets/fonts/AbrilFatface-Regular.ttf")
+    });
+    this.setState({ fontLoaded: true });
   }
   render() {
     return (
       <Container>
         <TitleBar>
-          <TitleText>
-            Hi,
-            <ColoredText> Andy</ColoredText>
-          </TitleText>
+          {this.state.fontLoaded ? (
+            <TitleText style={{ fontFamily: "Abril-Fatface" }}>
+              Hi,
+              <ColoredText> Andy</ColoredText>
+            </TitleText>
+          ) : null}
+
           <Cover>
             <ProfileImg source={require("../assets/images/Andy.png")} />
           </Cover>
         </TitleBar>
         <FactContainer>
-          <Fact>
-            <LargeText>$6000</LargeText>
-            <SmallText style={{ color: "#38d39f" }}>Total Invested</SmallText>
-          </Fact>
-          <Fact>
-            <LargeText>156</LargeText>
-            <SmallText style={{ color: "#38d39f" }}>People Helped</SmallText>
-          </Fact>
+          {this.state.fontLoaded ? (
+            <Fact>
+              <LargeText style={{ fontFamily: "Abril-Fatface" }}>
+                $6000
+              </LargeText>
+              <SmallText style={{ color: "#38d39f", fontFamily: "Avenir" }}>
+                Total Invested
+              </SmallText>
+            </Fact>
+          ) : null}
+          {this.state.fontLoaded ? (
+            <Fact>
+              <LargeText style={{ fontFamily: "Abril-Fatface" }}>156</LargeText>
+              <SmallText style={{ color: "#38d39f", fontFamily: "Avenir" }}>
+                People Helped
+              </SmallText>
+            </Fact>
+          ) : null}
         </FactContainer>
         <ViewLine></ViewLine>
         <People>
-          <SuggestedBar>
-            <LargeText>Suggested</LargeText>
-            <Text style={{ color: "#38d39f" }}>See All</Text>
-          </SuggestedBar>
+          {this.state.fontLoaded ? (
+            <SuggestedBar>
+              <LargeText style={{ fontFamily: "Abril-Fatface" }}>
+                Suggested
+              </LargeText>
+              <Text style={{ color: "#38d39f", fontFamily: "Avenir" }}>
+                See All
+              </Text>
+            </SuggestedBar>
+          ) : null}
           <ScrollView
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             style={{ marginTop: 30 }}
           >
             <ImageContainer>
-              {people.map((person, index) => (
-                <TouchableOpacity
-                  key={index}
-                  onPress={() =>
-                    this.props.navigation.push("Cards", {
-                      Cards: person
-                    })
-                  }
-                  style={{ marginRight: 20 }}
-                >
-                  <PeopleCard
-                    name={person.name}
-                    age={person.age}
-                    image={person.image}
-                    ambition={person.ambition}
-                  />
-                </TouchableOpacity>
-              ))}
+              {people.map(
+                (person, index) =>
+                  console.log("HILO BITCH", person) || (
+                    <TouchableOpacity
+                      key={index}
+                      onPress={() =>
+                        this.props.navigation.push("Cards", {
+                          Cards: person
+                        })
+                      }
+                      style={{ marginRight: 20 }}
+                    >
+                      <PeopleCard
+                        name={person.name}
+                        age={person.age}
+                        image={person.img}
+                        ambition={person.ambition}
+                      />
+                    </TouchableOpacity>
+                  )
+              )}
             </ImageContainer>
           </ScrollView>
         </People>
@@ -150,7 +181,7 @@ const ViewLine = styled.View`
 const people = [
   {
     img: require("../assets/images/Jordan.png"),
-    name: "Hank",
+    name: "Jordan",
     age: "55",
     ambition: "Online marketing",
     status: "Graduated",
@@ -159,19 +190,9 @@ const people = [
     fReq: "$1223",
     fAqr: "$232"
   },
+
   {
-    img: require("../assets/images/Jordan.png"),
-    name: "Steve",
-    age: "38",
-    ambition: "Develop cool apps",
-    status: "Graduated",
-    donated: "$25",
-    invested: "$500",
-    fReq: "$1223",
-    fAqr: "$232"
-  },
-  {
-    img: require("../assets/images/Jordan.png"),
+    img: require("../assets/images/Harvey.png"),
     name: "Harvey",
     age: "43",
     ambition: "Do social work",
@@ -182,7 +203,7 @@ const people = [
     fAqr: "$232"
   },
   {
-    img: require("../assets/images/Jordan.png"),
+    img: require("../assets/images/Pat.png"),
     name: "Pat",
     age: "42",
     ambition: "Inspire children",
@@ -193,7 +214,7 @@ const people = [
     fAqr: "$232"
   },
   {
-    img: require("../assets/images/Jordan.png"),
+    img: require("../assets/images/Joan.png"),
     name: "Joan",
     age: "47",
     ambition: "Work with data",
@@ -204,7 +225,7 @@ const people = [
     fAqr: "$232"
   },
   {
-    img: require("../assets/images/Jordan.png"),
+    img: require("../assets/images/Fazan.png"),
     name: "Fazan",
     age: "44",
     ambition: "Be a pharmacist",
@@ -215,21 +236,10 @@ const people = [
     fAqr: "$232"
   },
   {
-    img: require("../assets/images/Jordan.png"),
+    img: require("../assets/images/Joaquin.png"),
     name: "Joaquin",
     age: "37",
     ambition: "Design websites",
-    status: "Graduated",
-    donated: "$25",
-    invested: "$500",
-    fReq: "$1223",
-    fAqr: "$232"
-  },
-  {
-    img: require("../assets/images/Jordan.png"),
-    name: "Kevin",
-    age: "29",
-    ambition: "Graphic design",
     status: "Graduated",
     donated: "$25",
     invested: "$500",
