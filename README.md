@@ -1,2 +1,2 @@
 # Grow
-![home](/pictures/home.jpg | width=100)
+![home](/pictures/home.jpg = 100 x 100)
