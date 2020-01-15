@@ -1,2 +1,3 @@
 # Grow
-![home](/pictures/home.jpg =100x100)
+<img src = "/pictures/home.jpg" height="100"/>
+# ![home](/pictures/home.jpg =100x100)
