@@ -1,2 +1,2 @@
 # Grow
-![home](/pictures)
+![home](/pictures/home.jpg)
